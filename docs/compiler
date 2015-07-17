@@ -1,0 +1,9 @@
+﻿Starting to build the compiler.
+
+Error in configuring the package due to lack of gmp, mpfr, mpc
+Used second link to build them separately
+
+http://wiki.osdev.org/GCC_Cross-Compiler
+http://stackoverflow.com/questions/9450394/how-to-install-gcc-from-scratch-with-gmp-mpfr-mpc-elf-without-shared-librari
+
+The cross-compiler is needed for building the .o files, but the binaries are not included in the project.
