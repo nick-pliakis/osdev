@@ -1,0 +1,11 @@
+Implementing new line:
+
+New line is implemented by changing the terminal_putchar function.
+Checks if the character passed is '\n' (newline). If it is, then it resets the column and increments the line.
+This led to an extra space inserted at the start of each new line, due to the check performed later.
+So the check went into the branch corresponding to the old execution, while the branch corresponding to the new line only needs to check whether or not we passed the height limit.
+
+Implementing terminal scrolling:
+
+Modify the behaviour of the kernel when the terminal_row exceeds the VGA_HEIGHT.
+

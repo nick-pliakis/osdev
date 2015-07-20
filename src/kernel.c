@@ -79,12 +79,29 @@ void terminal_putentryat(char c, uint8_t color, size_t x, size_t y) {
     terminal_buffer[index] = make_vgaentry(c, color);
 }
 
+void terminal_advancebuffer() {
+    for (size_t i = 0; i < VGA_HEIGHT; i++) {
+        for (size_t j = 0; j < VGA_WIDTH; j++) {
+            terminal_buffer[i * VGA_WIDTH + j] = terminal_buffer[(i + 1) * VGA_WIDTH + j];
+        }
+    }
+}
+
 void terminal_putchar(char c) {
-    terminal_putentryat(c, terminal_color, terminal_column, terminal_row);
-    if (++terminal_column == VGA_WIDTH) {
+    if (c == '\n') {
         terminal_column = 0;
         if (++terminal_row == VGA_HEIGHT) {
-            terminal_row = 0;
+            terminal_advancebuffer();
+            terminal_row--;
+        }
+    } else {
+        terminal_putentryat(c, terminal_color, terminal_column, terminal_row);
+        if (++terminal_column == VGA_WIDTH) {
+            terminal_column = 0;
+            if (++terminal_row == VGA_HEIGHT) {
+                terminal_advancebuffer();
+                terminal_row = 0;
+            }
         }
     }
 }
@@ -102,5 +119,38 @@ extern "C"
 
 void kernel_main() {
     terminal_initialize();
-    terminal_writestring("Hello, kernel world!\n");
+    terminal_writestring("Hello, kernel world! 1\n");
+    terminal_writestring("Hello, kernel world! 2\n");
+    terminal_writestring("Hello, kernel world! 3\n");
+    terminal_writestring("Hello, kernel world! 4\n");
+    terminal_writestring("Hello, kernel world! 5\n");
+    terminal_writestring("Hello, kernel world! 6\n");
+
+    terminal_writestring("Hello, kernel world! 7\n");
+    terminal_writestring("Hello, kernel world! 8\n");
+    terminal_writestring("Hello, kernel world! 9\n");
+    terminal_writestring("Hello, kernel world! 10\n");
+    terminal_writestring("Hello, kernel world! 11\n");    
+    terminal_writestring("Hello, kernel world! 12\n");
+    terminal_writestring("Hello, kernel world! 13\n");
+    terminal_writestring("Hello, kernel world! 14\n");
+    terminal_writestring("Hello, kernel world! 15\n");
+    
+    terminal_writestring("Hello, kernel world! 16\n");
+    terminal_writestring("Hello, kernel world! 17\n");
+    terminal_writestring("Hello, kernel world! 18\n");
+    terminal_writestring("Hello, kernel world! 19\n");
+    terminal_writestring("Hello, kernel world! 20\n");
+    terminal_writestring("Hello, kernel world! 21\n");
+    terminal_writestring("Hello, kernel world! 22\n");
+
+    terminal_writestring("Hello, kernel world! 23\n");
+    terminal_writestring("Hello, kernel world! 24\n");
+    terminal_writestring("Hello, kernel world! 25\n");
+    terminal_writestring("Hello, kernel world! 26\n");
+    terminal_writestring("Hello, kernel world! 27\n");
+    terminal_writestring("Hello, kernel world! 28\n");
+
+    terminal_writestring("Hello, kernel world! 29\n");
+    terminal_writestring("Mourits is the best!!!\n");
 }
